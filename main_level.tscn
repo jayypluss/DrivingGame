@@ -1,0 +1,192 @@
+[gd_scene load_steps=14 format=3 uid="uid://dheqkcd8rukep"]
+
+[ext_resource type="PackedScene" uid="uid://ci52bv1m15cbs" path="res://cars/YellowCar.tscn" id="2_qdyuv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4mec"]
+albedo_color = Color(0, 0.231373, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_da5wf"]
+albedo_color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7pnx2"]
+sky_top_color = Color(0, 0.576471, 0.670588, 1)
+sky_horizon_color = Color(0.756863, 0.623529, 0.305882, 1)
+ground_bottom_color = Color(0, 0.231373, 0, 1)
+ground_horizon_color = Color(0.486275, 0.733333, 0.364706, 1)
+
+[sub_resource type="Sky" id="Sky_8bxpg"]
+sky_material = SubResource("ProceduralSkyMaterial_7pnx2")
+
+[sub_resource type="Environment" id="Environment_nngjm"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_8bxpg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pwwln"]
+radius = 600.0
+height = 200.0
+radial_segments = 14
+rings = 128
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_045nu"]
+albedo_color = Color(0.345098, 0.129412, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_png2m"]
+radius = 600.0
+height = 400.0
+radial_segments = 14
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_7qui4"]
+radius = 600.0
+height = 600.0
+radial_segments = 14
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6jn2u"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_x5uuv"]
+plane = Plane(0, -1, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_usko5"]
+size = Vector3(50, 50, 0.001)
+
+[node name="MainLevel" type="Node3D"]
+
+[node name="Grass" type="StaticBody3D" parent="."]
+
+[node name="Mesh" type="CSGBox3D" parent="Grass"]
+use_collision = true
+collision_layer = 2
+size = Vector3(4000, 0.05, 4000)
+material = SubResource("StandardMaterial3D_b4mec")
+
+[node name="Asphalt" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 1825.41)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Asphalt"]
+use_collision = true
+collision_layer = 2
+
+[node name="FirstSection" type="CSGBox3D" parent="Asphalt/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -131.72)
+size = Vector3(20, 0.002, 600)
+material = SubResource("StandardMaterial3D_da5wf")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="Asphalt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 190.066, 0, -431.969)
+use_collision = true
+collision_layer = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Asphalt/CSGCombiner3D2"]
+radius = 200.0
+height = 0.001
+sides = 64
+material = SubResource("StandardMaterial3D_da5wf")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Asphalt/CSGCombiner3D2"]
+operation = 2
+radius = 180.0
+height = 0.001
+sides = 64
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Asphalt/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 101.199)
+operation = 2
+size = Vector3(400, 1, 200)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Asphalt/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.104, 0, -99.3584)
+operation = 2
+size = Vector3(200, 1, 210)
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="Asphalt"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 190.066, 0, -812.004)
+use_collision = true
+collision_layer = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Asphalt/CSGCombiner3D3"]
+radius = 200.0
+height = 0.001
+sides = 64
+material = SubResource("StandardMaterial3D_da5wf")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Asphalt/CSGCombiner3D3"]
+operation = 2
+radius = 180.0
+height = 0.001
+sides = 64
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Asphalt/CSGCombiner3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 101.199)
+operation = 2
+size = Vector3(400, 1, 200)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Asphalt/CSGCombiner3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.104, 0, -99.3584)
+operation = 2
+size = Vector3(200, 1, 210)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nngjm")
+
+[node name="StartingPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2003.05)
+
+[node name="car" parent="." instance=ExtResource("2_qdyuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.89849, 1993.35)
+
+[node name="Mountains" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.3634, 0, 1368.77)
+
+[node name="M1" type="MeshInstance3D" parent="Mountains"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -818.048, 0, 28.6686)
+mesh = SubResource("SphereMesh_pwwln")
+surface_material_override/0 = SubResource("StandardMaterial3D_045nu")
+
+[node name="M2" type="MeshInstance3D" parent="Mountains"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -585.459, -0.610947, -871.687)
+mesh = SubResource("SphereMesh_png2m")
+surface_material_override/0 = SubResource("StandardMaterial3D_045nu")
+
+[node name="M3" type="MeshInstance3D" parent="Mountains"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168.428, 0, -1724.51)
+mesh = SubResource("SphereMesh_pwwln")
+surface_material_override/0 = SubResource("StandardMaterial3D_045nu")
+
+[node name="M4" type="MeshInstance3D" parent="Mountains"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 569.876, -0.610947, -2444.43)
+mesh = SubResource("SphereMesh_7qui4")
+surface_material_override/0 = SubResource("StandardMaterial3D_045nu")
+
+[node name="MeshInstance3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -10.2047, 3.17732, 1445.79)
+collision_layer = 2
+
+[node name="CollisionPolygon3D" type="CollisionShape3D" parent="MeshInstance3D"]
+shape = SubResource("WorldBoundaryShape3D_6jn2u")
+
+[node name="MeshInstance3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 386.934, 3.17732, 1447.43)
+collision_layer = 2
+
+[node name="CollisionPolygon3D" type="CollisionShape3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877383, 0)
+shape = SubResource("WorldBoundaryShape3D_x5uuv")
+
+[node name="MeshInstance3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 191.139, 3.17732, 1987.18)
+collision_layer = 2
+
+[node name="CollisionPolygon3D" type="CollisionShape3D" parent="MeshInstance3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877383, 0)
+shape = SubResource("WorldBoundaryShape3D_x5uuv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00421906, 31.9321, 1906.62)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_usko5")
